@@ -6,9 +6,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.lcd.views.adapters.DeviceListAdapter;
 
@@ -20,15 +18,13 @@ import io.particle.android.sdk.cloud.ParticleCloudException;
 import io.particle.android.sdk.cloud.ParticleCloudSDK;
 import io.particle.android.sdk.cloud.ParticleDevice;
 import io.particle.android.sdk.utils.Async;
-import io.particle.android.sdk.utils.Toaster;
 import lcd.particle.R;
-import retrofit.http.Part;
 
 /**
- * Created by matias on 16/06/17.
+ * Created by matia on 19-Jun-17.
  */
 
-public class DeviceListFragment extends Fragment {
+public class InputListFragment extends Fragment {
     private DeviceListAdapter adapter;
     private List<ParticleDevice> devices;
 
@@ -45,7 +41,7 @@ public class DeviceListFragment extends Fragment {
 
 
     private void setupListView(View view) {
-        final ListView lvDevice = (ListView) view.findViewById(R.id.lvDevice);
+        ListView lvDevice = (ListView) view.findViewById(R.id.lvDevice);
         adapter = new DeviceListAdapter();
         adapter.init(getActivity(), lvDevice);
         adapter.setKeepOnAppending(false);

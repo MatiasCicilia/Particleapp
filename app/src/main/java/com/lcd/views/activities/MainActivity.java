@@ -4,8 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +20,12 @@ import android.view.MenuItem;
 
 import com.lcd.views.fragments.DeviceListFragment;
 
+import java.io.IOException;
+
+import io.particle.android.sdk.cloud.ParticleCloud;
+import io.particle.android.sdk.cloud.ParticleCloudException;
+import io.particle.android.sdk.cloud.ParticleCloudSDK;
+import io.particle.android.sdk.utils.Async;
 import lcd.particle.R;
 
 import static lcd.particle.R.id.fab;
@@ -37,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DeviceListFragment deviceListFragment;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,29 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ParticleCloudSDK.init(this);
+
+        Async.executeAsync(ParticleCloudSDK.getCloud(), new Async.ApiWork<ParticleCloud, Object>() {
+            @Override
+            public Object callApi(@NonNull ParticleCloud particleCloud) throws ParticleCloudException, IOException {
+                ParticleCloudSDK.getCloud().logIn("nachoberdinas@gmail.com", "wololo");
+                return null;
+            }
+
+            @Override
+            public void onSuccess(@NonNull Object o) {
+                Log.d(TAG, "Logged in as " + ParticleCloudSDK.getCloud().getLoggedInUsername());
+            }
+
+            @Override
+            public void onFailure(@NonNull ParticleCloudException exception) {
+                Log.wtf(TAG, "Failed to log in");
+            }
+        });
+
+        deviceListFragment = new DeviceListFragment();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
