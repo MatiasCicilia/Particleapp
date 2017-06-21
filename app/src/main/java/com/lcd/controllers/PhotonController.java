@@ -44,15 +44,13 @@ public class PhotonController {
         return instance;
     }
 
-    public void createForeignVariable(int value, String deviceId, String name) {
-        ForeignVariable foreignVariable = new ForeignVariable(deviceId, name);
-        foreignVariable.setValId(id.incrementAndGet());
+    public void createForeignVariable(String deviceId, String name, int valId) {
+        ForeignVariable foreignVariable = new ForeignVariable(id.incrementAndGet(),valId,deviceId, name);
         foreignVariables.add(foreignVariable);
     }
 
-    public void createInputConnection(int inputId, ConnectionType input, int value, String deviceId, String name) {
-        InputConnection inputConnection = new InputConnection(inputId, input, deviceId, name);
-        inputConnection.setValId(id.incrementAndGet());
+    public void createInputConnection(int inputId, ConnectionType input,String deviceId, String name) {
+        InputConnection inputConnection = new InputConnection(id.incrementAndGet(),inputId, input, deviceId, name);
         inputConnections.add(inputConnection);
     }
 
@@ -64,13 +62,27 @@ public class PhotonController {
     public void createVariable(int valId1, int valId2,
                                int inputConstant, Operator op, Result result,
                                int resultConstant, boolean global, String deviceId, String name) {
-
-        Variable variable = new Variable(valId1, valId2,
+        Variable variable = new Variable(id.incrementAndGet(),valId1, valId2,
         inputConstant, op, result,
         resultConstant, global, deviceId, name);
 
-        variable.setValId(id.incrementAndGet());
         variables.add(variable);
+    }
+
+    public void configure(){
+        sendInputs();
+        sendVariables();
+        sendVariables();
+        sendOutputs();
+    }
+
+    private void sendInputs() {
+    }
+
+    private void sendVariables() {
+    }
+
+    private void sendOutputs() {
     }
 
     public List<AbstractVariable> getPossibleVariables(String deviceId) {

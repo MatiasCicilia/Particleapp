@@ -16,11 +16,11 @@ public class Variable extends AbstractVariable {
     private int resultConstant;
     private boolean global;
 
-    public Variable(int valId1, int valId2,
+    public Variable(int valId, int valId1, int valId2,
                     int inputConstant, Operator op, Result result,
                     int resultConstant, boolean global, String deviceId, String name) {
 
-        super(deviceId, name);
+        super(valId,deviceId, name);
         this.valId1 = valId1;
         this.valId2 = valId2;
         this.inputConstant = inputConstant;

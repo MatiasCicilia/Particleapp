@@ -11,11 +11,11 @@ public class OutputConnection extends Entity {
     private ConnectionType outputType; //Type of output
     private int valId;
 
-    public OutputConnection(int outputId, ConnectionType outputType, int value, String deviceId, String name) {
+    public OutputConnection(int outputId, ConnectionType outputType, int valId, String deviceId, String name) {
         super(deviceId, name);
         this.outputId = outputId;
         this.outputType = outputType;
-        this.valId = value;
+        this.valId = valId;
     }
 
     public int getOutputId() {

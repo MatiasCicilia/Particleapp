@@ -6,7 +6,10 @@ package com.lcd.models;
 
 public class ForeignVariable extends AbstractVariable{
 
-    public ForeignVariable(String deviceId, String name) {
-        super(deviceId, name);
+    private int remoteValId;
+
+    public ForeignVariable(int valId,int remoteValId,String deviceId, String name) {
+        super(valId,deviceId, name);
+        this.remoteValId = remoteValId;
     }
 }

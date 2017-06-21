@@ -38,7 +38,6 @@ public class VariableListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_variable_list, container, false);
         setupListView(view);
 
-        sendItemsToAdapter();
 
         return view;
     }
@@ -51,10 +50,5 @@ public class VariableListFragment extends Fragment {
         adapter.setKeepOnAppending(false);
         adapter.setManager(getFragmentManager());
         lvVariable.setAdapter(adapter);
-    }
-
-    public void sendItemsToAdapter() {
-
-
     }
 }
