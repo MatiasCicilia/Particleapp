@@ -11,4 +11,19 @@
     <string name="variable_name">Variable Name:</string>
     <string name="variable_type">Variable Type:</string>
     <string name="variable_status">Variable Status:</string>
+    <string name="enter_val_id_1">Enter Val Id 1</string>
+    <string name="create_new_variable">Create new Variable</string>
+    <string name="enter_val_id_2">Enter Val Id 2</string>
+    <string name="enter_input_constant">Enter Input Constant</string>
+    <string name="choose_operator">Choose Operator</string>
+    <string name="choose_result">Choose Result</string>
+    <string name="enter_result_constant">Enter Result Constant</string>
+    <string name="global_variable">Global Variable</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_device">Choose device</string>
+    <string name="enter_name">Enter name</string>
+    <string name="choose_valid1">Choose Val Id1</string>
+    <string name="choose_valid2">Choose Val Id2</string>
+    <string name="enter_variable_name">Enter Variable name</string>
 </resources>

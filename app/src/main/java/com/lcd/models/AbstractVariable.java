@@ -8,10 +8,8 @@ public class AbstractVariable extends Entity{
     private int valId;
     private int value;
 
-    public AbstractVariable(int valId, int value, String deviceId, String name) {
+    public AbstractVariable(String deviceId, String name) {
         super(deviceId, name);
-        this.valId = valId;
-        this.value = value;
     }
 
     public int getValId() {

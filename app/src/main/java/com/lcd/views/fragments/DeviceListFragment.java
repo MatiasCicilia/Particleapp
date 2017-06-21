@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.lcd.controllers.PhotonController;
 import com.lcd.views.adapters.DeviceListAdapter;
 
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class DeviceListFragment extends Fragment {
         Async.executeAsync(ParticleCloudSDK.getCloud(), new Async.ApiWork<ParticleCloud, List<ParticleDevice>>() {
             @Override
             public List<ParticleDevice> callApi(@NonNull ParticleCloud particleCloud) throws ParticleCloudException, IOException {
-                return ParticleCloudSDK.getCloud().getDevices();
+                return PhotonController.getInstance().getDevices();
             }
 
             @Override

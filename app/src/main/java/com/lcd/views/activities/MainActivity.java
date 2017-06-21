@@ -18,7 +18,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.lcd.controllers.PhotonController;
 import com.lcd.views.fragments.DeviceListFragment;
+import com.lcd.views.fragments.VariableListFragment;
+import com.lcd.views.fragments.dialogs.CreateVariableDialogFragment;
 
 import java.io.IOException;
 
@@ -30,6 +33,7 @@ import lcd.particle.R;
 
 import static lcd.particle.R.id.fab;
 import static lcd.particle.R.id.nav_devices;
+import static lcd.particle.R.id.nav_variables;
 
 /*
 Cloud SDK usage mostly revolves around two main classes:
@@ -44,8 +48,9 @@ Cloud SDK usage mostly revolves around two main classes:
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DeviceListFragment deviceListFragment;
     private static final String TAG = MainActivity.class.getSimpleName();
+    private DeviceListFragment deviceListFragment;
+    private VariableListFragment variableListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public Object callApi(@NonNull ParticleCloud particleCloud) throws ParticleCloudException, IOException {
                 ParticleCloudSDK.getCloud().logIn("nachoberdinas@gmail.com", "wololo");
+                PhotonController.getInstance().setDevices(ParticleCloudSDK.getCloud().getDevices());
                 return null;
             }
 
@@ -74,17 +80,20 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        deviceListFragment = new DeviceListFragment();
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                CreateVariableDialogFragment fragment = new CreateVariableDialogFragment();
+                fragment.setArguments(new Bundle());
+                fragment.show(getFragmentManager(),"");
             }
         });
+
+        deviceListFragment = new DeviceListFragment();
+        variableListFragment = new VariableListFragment();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -137,6 +146,9 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case nav_devices:
                 fragment = deviceListFragment;
+                break;
+            case nav_variables:
+                fragment = variableListFragment;
                 break;
         }
 

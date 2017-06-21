@@ -18,9 +18,9 @@ public class Variable extends AbstractVariable {
 
     public Variable(int valId1, int valId2,
                     int inputConstant, Operator op, Result result,
-                    int resultConstant, boolean global, int valId, int value, String deviceId, String name) {
+                    int resultConstant, boolean global, String deviceId, String name) {
 
-        super(valId, value, deviceId, name);
+        super(deviceId, name);
         this.valId1 = valId1;
         this.valId2 = valId2;
         this.inputConstant = inputConstant;
@@ -84,5 +84,18 @@ public class Variable extends AbstractVariable {
 
     public void setGlobal(boolean global) {
         this.global = global;
+    }
+
+    @Override
+    public String toString() {
+        return "Variable{" +
+                "valId1=" + valId1 +
+                ", valId2=" + valId2 +
+                ", inputConstant=" + inputConstant +
+                ", op=" + op +
+                ", result=" + result +
+                ", resultConstant=" + resultConstant +
+                ", global=" + global +
+                '}';
     }
 }

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.particle.android.sdk.cloud.ParticleDevice;
+
 /**
  * Created by Matias Cicilia on 20-Jun-17.
  */
@@ -23,6 +25,7 @@ public class PhotonController {
     private List<InputConnection> inputConnections;
     private List<OutputConnection> outputConnections;
     private List<Variable> variables;
+    private List<ParticleDevice> devices;
     private static PhotonController instance;
     private static AtomicInteger id;
 
@@ -42,12 +45,14 @@ public class PhotonController {
     }
 
     public void createForeignVariable(int value, String deviceId, String name) {
-        ForeignVariable foreignVariable = new ForeignVariable(id.incrementAndGet(), value, deviceId, name);
+        ForeignVariable foreignVariable = new ForeignVariable(deviceId, name);
+        foreignVariable.setValId(id.incrementAndGet());
         foreignVariables.add(foreignVariable);
     }
 
     public void createInputConnection(int inputId, ConnectionType input, int value, String deviceId, String name) {
-        InputConnection inputConnection = new InputConnection(id.incrementAndGet(), inputId, input, value, deviceId, name);
+        InputConnection inputConnection = new InputConnection(inputId, input, deviceId, name);
+        inputConnection.setValId(id.incrementAndGet());
         inputConnections.add(inputConnection);
     }
 
@@ -58,12 +63,13 @@ public class PhotonController {
 
     public void createVariable(int valId1, int valId2,
                                int inputConstant, Operator op, Result result,
-                               int resultConstant, boolean global, int value, String deviceId, String name) {
+                               int resultConstant, boolean global, String deviceId, String name) {
 
         Variable variable = new Variable(valId1, valId2,
         inputConstant, op, result,
-        resultConstant, global, id.incrementAndGet(), value, deviceId, name);
+        resultConstant, global, deviceId, name);
 
+        variable.setValId(id.incrementAndGet());
         variables.add(variable);
     }
 
@@ -87,5 +93,11 @@ public class PhotonController {
         return result;
     }
 
+    public List<ParticleDevice> getDevices() {
+        return devices;
+    }
 
+    public void setDevices(List<ParticleDevice> devices) {
+        this.devices = devices;
+    }
 }

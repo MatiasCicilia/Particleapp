@@ -10,8 +10,8 @@ public class InputConnection extends AbstractVariable {
     private int inputId;  //Patita
     private ConnectionType input; //Type of input
 
-    public InputConnection(int valId, int inputId, ConnectionType input, int value, String deviceId, String name) {
-        super(valId, value, deviceId, name);
+    public InputConnection(int inputId, ConnectionType input, String deviceId, String name) {
+        super(deviceId, name);
         this.inputId = inputId;
         this.input = input;
     }
