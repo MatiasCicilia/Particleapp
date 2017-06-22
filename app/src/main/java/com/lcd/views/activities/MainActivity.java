@@ -21,6 +21,7 @@ import android.view.MenuItem;
 
 import com.lcd.controllers.PhotonController;
 import com.lcd.views.fragments.DeviceListFragment;
+import com.lcd.views.fragments.GlobalConfigListFragment;
 import com.lcd.views.fragments.GlobalListFragment;
 import com.lcd.views.fragments.InputListFragment;
 import com.lcd.views.fragments.OutputListFragment;
@@ -39,6 +40,7 @@ import io.particle.android.sdk.utils.Async;
 import lcd.particle.R;
 
 import static lcd.particle.R.id.fab;
+import static lcd.particle.R.id.nav_config;
 import static lcd.particle.R.id.nav_devices;
 import static lcd.particle.R.id.nav_globals;
 import static lcd.particle.R.id.nav_inputs;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity
     private OutputListFragment outputListFragment;
     private InputListFragment inputListFragment;
     private GlobalListFragment globalListFragment;
+    private GlobalConfigListFragment globalConfigListFragment;
     private FloatingActionButton fab;
 
     @Override
@@ -104,6 +107,7 @@ public class MainActivity extends AppCompatActivity
         outputListFragment = new OutputListFragment();
         inputListFragment = new InputListFragment();
         globalListFragment = new GlobalListFragment();
+        globalConfigListFragment = new GlobalConfigListFragment();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -113,6 +117,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_devices));
     }
 
     @Override
@@ -162,6 +168,10 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         fab.show();
         switch (id) {
+            case nav_config:
+                fragment = globalConfigListFragment;
+                fab.hide();
+                break;
             case nav_devices:
                 fragment = deviceListFragment;
                 fab.hide();

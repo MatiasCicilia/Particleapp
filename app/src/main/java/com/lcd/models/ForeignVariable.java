@@ -17,14 +17,6 @@ public class ForeignVariable extends AbstractVariable{
         this.remoteValId = remoteValId;
     }
 
-    public boolean isHeadless() {
-        return headless;
-    }
-
-    public void setHeadless(boolean headless) {
-        this.headless = headless;
-    }
-
     public int getRemoteValId() {
         return remoteValId;
     }

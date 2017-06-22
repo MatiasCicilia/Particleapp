@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_devices"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Devices" />
-        <item
-            android:id="@+id/nav_variables"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Variables" />
-        <item
-            android:id="@+id/nav_inputs"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Inputs" />
-        <item
-            android:id="@+id/nav_outputs"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Outputs" />
-        <item
-            android:id="@+id/nav_globals"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Variables Globales" />
-    </group>
+    <item android:title="Usuario"
+        android:id="@+id/submenu_2">
+        <menu>
+            <item
+                android:id="@+id/nav_devices"
+                android:icon="@drawable/ic_devices"
+                android:title="Devices" />
+            <item
+                android:id="@+id/nav_config"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Config Variables Globales" />
+        </menu>
+    </item>
+
+    <item android:title="Usuario Experto"
+        android:id="@+id/submenu_1">
+        <menu>
+            <item
+                android:id="@+id/nav_variables"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Variables" />
+            <item
+                android:id="@+id/nav_inputs"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Inputs" />
+            <item
+                android:id="@+id/nav_outputs"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Outputs" />
+            <item
+                android:id="@+id/nav_globals"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Variables Globales" />
+        </menu>
+    </item>
+
 
 </menu>
