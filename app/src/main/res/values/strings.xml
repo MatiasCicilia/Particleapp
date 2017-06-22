@@ -7,7 +7,7 @@
     <string name="action_settings">Configure</string>
     <string name="device_name">Device Name</string>
     <string name="device_description">Device Description</string>
-    <string name="device_status">Device Status</string>
+    <string name="device_status">Device Status: </string>
     <string name="variable_name">Variable Name:</string>
     <string name="variable_type">Variable Type:</string>
     <string name="variable_status">Variable Status:</string>
@@ -26,4 +26,7 @@
     <string name="choose_valid1">Choose Val Id1</string>
     <string name="choose_valid2">Choose Val Id2</string>
     <string name="enter_variable_name">Enter Variable name</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="lcd_particle">LCD Particle</string>
 </resources>

@@ -2,14 +2,18 @@ package com.lcd.views.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.lcd.controllers.PhotonController;
+import com.lcd.models.ForeignVariable;
 import com.lcd.views.adapters.GlobalListAdapter;
 import com.lcd.views.adapters.OutputListAdapter;
+
+import java.util.List;
 
 import lcd.particle.R;
 
@@ -25,7 +29,9 @@ public class GlobalListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         setupListView(view);
 
-        adapter.notifyNewItems(PhotonController.getInstance().getForeignVariables());
+        List<ForeignVariable> items = PhotonController.getInstance().getForeignVariables();
+        Log.d("Global list fragment", "Current items " + items);
+        adapter.notifyNewItems(items);
 
         return view;
     }

@@ -17,6 +17,10 @@ public class ForeignVariable extends AbstractVariable{
         this.remoteValId = remoteValId;
     }
 
+    public ForeignVariable(String deviceId, String name) {
+        super(deviceId, name);
+    }
+
     public int getRemoteValId() {
         return remoteValId;
     }
@@ -26,5 +30,13 @@ public class ForeignVariable extends AbstractVariable{
         argList.add(getValId()+"");
         argList.add(getRemoteValId()+"");
         return argList;
+    }
+
+    @Override
+    public String toString() {
+        return "ForeignVariable{" +
+                "remoteValId=" + remoteValId +
+                ", headless=" + headless +
+                '}';
     }
 }

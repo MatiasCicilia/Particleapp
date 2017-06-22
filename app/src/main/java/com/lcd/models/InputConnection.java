@@ -19,6 +19,10 @@ public class InputConnection extends AbstractVariable {
         this.input = input;
     }
 
+    public InputConnection(String deviceId, String name) {
+        super(deviceId, name);
+    }
+
     public int getInputId() {
         return inputId;
     }

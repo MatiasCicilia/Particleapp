@@ -12,6 +12,10 @@ public class AbstractVariable extends Entity{
         this.valId = valId;
     }
 
+    public AbstractVariable(String deviceId, String name) {
+        super(deviceId, name);
+    }
+
     public int getValId() {
         return valId;
     }

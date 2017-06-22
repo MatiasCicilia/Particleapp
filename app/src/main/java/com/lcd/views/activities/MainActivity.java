@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        PhotonController.getInstance().load(this);
         ParticleCloudSDK.init(this);
 
         Async.executeAsync(ParticleCloudSDK.getCloud(), new Async.ApiWork<ParticleCloud, Object>() {
@@ -155,6 +156,9 @@ public class MainActivity extends AppCompatActivity
             };
             new Thread(runnable).start();
             return true;
+        }
+        else if (id == R.id.action_save) {
+            PhotonController.getInstance().save(this);
         }
 
         return super.onOptionsItemSelected(item);

@@ -22,7 +22,6 @@
                 android:id="@+id/deviceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/device_name"
                 android:textSize="20sp"/>
 
             <TextView

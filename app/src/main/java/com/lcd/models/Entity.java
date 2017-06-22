@@ -13,6 +13,9 @@ public class Entity {
         this.deviceId = deviceId;
     }
 
+    public Entity() {
+    }
+
     public String getDeviceId() {
         return deviceId;
     }

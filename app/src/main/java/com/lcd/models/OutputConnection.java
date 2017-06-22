@@ -21,6 +21,8 @@ public class OutputConnection extends Entity {
         this.valId = valId;
     }
 
+
+
     public int getOutputId() {
         return outputId;
     }

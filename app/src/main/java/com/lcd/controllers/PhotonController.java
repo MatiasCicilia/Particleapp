@@ -1,7 +1,10 @@
 package com.lcd.controllers;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.lcd.models.AbstractVariable;
 import com.lcd.models.Entity;
 import com.lcd.models.ForeignVariable;
@@ -19,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import io.particle.android.sdk.cloud.ParticleCloudException;
 import io.particle.android.sdk.cloud.ParticleDevice;
+import lcd.particle.R;
 
 /**
  * Created by Matias Cicilia on 20-Jun-17.
@@ -49,11 +53,14 @@ public class PhotonController {
     }
 
     public void createForeignVariable(String deviceId, String name, int valId) {
+        Log.d("PhotonController", "Creating: " + deviceId +" "+ name+" "+ + valId);
+        Log.d("PhotonController", "Insert on list " + foreignVariables);
         if(valId == -1){
             valId = id.incrementAndGet();
         }
-        ForeignVariable foreignVariable = new ForeignVariable(id.incrementAndGet(),valId,deviceId,name);
+        ForeignVariable foreignVariable = new ForeignVariable(id.incrementAndGet(), valId, deviceId, name);
         foreignVariables.add(foreignVariable);
+        Log.d("PhotonController", "Foreign variable list is now: " + foreignVariables);
     }
 
     public void createInputConnection(int inputId, ConnectionType input,String deviceId, String name) {
@@ -200,5 +207,35 @@ public class PhotonController {
 
     public List<Variable> getVariables() {
         return variables;
+    }
+
+    public void load(Context context) {
+        Gson gson = new Gson();
+        SharedPreferences mPrefs= context.getSharedPreferences(context.getApplicationInfo().name, Context.MODE_PRIVATE);
+        ListContainer listContainer = gson.fromJson(mPrefs.getString("myObjectKey", "{}"), ListContainer.class);
+        if (listContainer.variables != null) this.variables = listContainer.variables;
+        if (listContainer.inputConnections != null) this.inputConnections = listContainer.inputConnections;
+        if (listContainer.outputConnections != null) this.outputConnections = listContainer.outputConnections;
+        if (listContainer.outputConnections != null) this.foreignVariables = listContainer.foreignVariables;
+    }
+
+    public void save(Context context){
+        SharedPreferences mPrefs= context.getSharedPreferences(context.getApplicationInfo().name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed=mPrefs.edit();
+        Gson gson = new Gson();
+        ListContainer listContainer = new ListContainer();
+        listContainer.foreignVariables = this.foreignVariables;
+        listContainer.inputConnections = this.inputConnections;
+        listContainer.outputConnections = this.outputConnections;
+        listContainer.variables = this.variables;
+        ed.putString("myObjectKey", gson.toJson(listContainer));
+        ed.commit();
+    }
+
+    private class ListContainer {
+        List<ForeignVariable> foreignVariables;
+        List<InputConnection> inputConnections;
+        List<OutputConnection> outputConnections;
+        List<Variable> variables;
     }
 }

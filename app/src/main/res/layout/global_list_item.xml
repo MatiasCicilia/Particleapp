@@ -11,7 +11,7 @@
     card_view:cardCornerRadius="6dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -19,14 +19,13 @@
                 android:id="@+id/inputName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/variable_name"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/inputDeviceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/variable_type"
+                android:text="Device: "
                 android:textSize="15sp" />
 
 
@@ -34,8 +33,22 @@
                 android:id="@+id/inputValId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Variable ID:"
+                android:text="Variable ID: "
                 android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/inputListening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listening to: "
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Delete" />
 
         </LinearLayout>
 

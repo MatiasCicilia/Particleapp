@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_view"
-    android:layout_gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-    card_view:cardElevation="6dp"
-    card_view:contentPadding="10dp"
-    card_view:cardCornerRadius="6dp">
+        card_view:cardElevation="6dp"
+        card_view:contentPadding="10dp"
+        card_view:cardCornerRadius="6dp">
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -20,8 +20,7 @@
                 android:id="@+id/variableName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/variable_name"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/variableDeviceName"
@@ -35,14 +34,14 @@
                 android:id="@+id/variableValId1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Variable Val ID 1: "
+                android:text="Val ID 1: "
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/variableValId2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Variable Val ID 2: "
+                android:text="Val ID 2: "
                 android:textSize="15sp" />
 
             <TextView
@@ -56,14 +55,14 @@
                 android:id="@+id/variableOperator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Variable Operator: "
+                android:text="Operator: "
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/variableResult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Variable Result: "
+                android:text="Result: "
                 android:textSize="15sp" />
 
 
@@ -71,7 +70,7 @@
                 android:id="@+id/variableResultConstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Variable Result Constant: "
+                android:text="Constant: "
                 android:textSize="15sp" />
 
 
@@ -79,8 +78,15 @@
                 android:id="@+id/variableGlobal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Variable Global: "
+                android:text="Global: "
                 android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Delete" />
         </LinearLayout>
 
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>

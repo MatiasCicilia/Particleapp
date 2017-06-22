@@ -12,9 +12,10 @@
         android:horizontalSpacing="6dp"
         android:stretchMode = "columnWidth"
         android:gravity="center"
-        android:divider="@null"
         android:layout_weight="1"
         android:padding="8dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="7dp"
         />
 
 </LinearLayout>
