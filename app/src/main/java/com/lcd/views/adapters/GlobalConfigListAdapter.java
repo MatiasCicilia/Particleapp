@@ -31,6 +31,9 @@ public class GlobalConfigListAdapter extends AbstractPagedArrayAdapter<ForeignVa
         final TextView valId = (TextView) view.findViewById(R.id.inputValId);
         valId.append(item.getValId()+"");
 
+        final TextView valRemote = (TextView) view.findViewById(R.id.inputListening);
+        valRemote.append(item.getRemoteValId()+"");
+
         final EditText value = (EditText) view.findViewById(R.id.globalValue);
 
         Button send = (Button) view.findViewById(R.id.globalButton);

@@ -8,12 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:columnWidth="200dp"
-        android:verticalSpacing="5dp"
+        android:verticalSpacing="8dp"
         android:horizontalSpacing="6dp"
         android:stretchMode= "columnWidth"
         android:gravity="center"
         android:divider="@null"
         android:layout_weight="1"
+        android:padding="8dp"
         />
 
 </LinearLayout>
