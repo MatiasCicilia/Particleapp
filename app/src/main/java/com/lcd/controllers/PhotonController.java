@@ -1,5 +1,7 @@
 package com.lcd.controllers;
 
+import android.util.Log;
+
 import com.lcd.models.AbstractVariable;
 import com.lcd.models.Entity;
 import com.lcd.models.ForeignVariable;
@@ -10,10 +12,12 @@ import com.lcd.models.enums.ConnectionType;
 import com.lcd.models.enums.Operator;
 import com.lcd.models.enums.Result;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.particle.android.sdk.cloud.ParticleCloudException;
 import io.particle.android.sdk.cloud.ParticleDevice;
 
 /**
@@ -45,7 +49,10 @@ public class PhotonController {
     }
 
     public void createForeignVariable(String deviceId, String name, int valId) {
-        ForeignVariable foreignVariable = new ForeignVariable(id.incrementAndGet(),valId,deviceId, name);
+        if(valId == -1){
+            valId = id.incrementAndGet();
+        }
+        ForeignVariable foreignVariable = new ForeignVariable(id.incrementAndGet(),valId,deviceId,name);
         foreignVariables.add(foreignVariable);
     }
 
@@ -62,7 +69,11 @@ public class PhotonController {
     public void createVariable(int valId1, int valId2,
                                int inputConstant, Operator op, Result result,
                                int resultConstant, boolean global, String deviceId, String name) {
-        Variable variable = new Variable(id.incrementAndGet(),valId1, valId2,
+        int valId = id.incrementAndGet();
+        valId1 = valId1==-1?valId:valId1;
+        valId2 = valId2==-1?valId:valId2;
+
+        Variable variable = new Variable(valId,valId1, valId2,
         inputConstant, op, result,
         resultConstant, global, deviceId, name);
 
@@ -70,19 +81,81 @@ public class PhotonController {
     }
 
     public void configure(){
-        sendInputs();
-        sendVariables();
-        sendVariables();
-        sendOutputs();
+        for(ParticleDevice d: devices){
+            sendInputs(d);
+            sendGlobals(d);
+            sendVariables(d);
+            sendVariables(d);
+            sendOutputs(d);
+        }
     }
 
-    private void sendInputs() {
+    private void sendGlobals(ParticleDevice device) {
+        Log.d("Controller","Sending inputs");
+        for(ForeignVariable f: foreignVariables){
+            if(f.getDeviceId().equals(device.getName())){
+                try {
+                    Log.d("Controller","Call function response "+device.callFunction("global",f.toArgList()));
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParticleDevice.FunctionDoesNotExistException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    private void sendVariables() {
+    private void sendInputs(ParticleDevice device) {
+        Log.d("Controller","Sending inputs");
+        for(InputConnection c: inputConnections){
+            if(c.getDeviceId().equals(device.getName())){
+                try {
+                    Log.d("Controller","Sending input "+c.getName()+ " to "+c.getDeviceId());
+                    Log.d("Controller","Call function response "+device.callFunction("input",c.toArgList()));
+
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParticleDevice.FunctionDoesNotExistException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    private void sendOutputs() {
+    private void sendVariables(ParticleDevice device) {
+        for(Variable v: variables){
+            if(v.getDeviceId().equals(device.getName())){
+                try {
+                    device.callFunction("variable",v.toArgList());
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParticleDevice.FunctionDoesNotExistException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void sendOutputs(ParticleDevice device) {
+        for(OutputConnection o: outputConnections){
+            if(o.getDeviceId().equals(device.getName())){
+                try {
+                    device.callFunction("output",o.toArgList());
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParticleDevice.FunctionDoesNotExistException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public List<AbstractVariable> getPossibleVariables(String deviceId) {
@@ -111,5 +184,21 @@ public class PhotonController {
 
     public void setDevices(List<ParticleDevice> devices) {
         this.devices = devices;
+    }
+
+    public List<ForeignVariable> getForeignVariables() {
+        return foreignVariables;
+    }
+
+    public List<InputConnection> getInputConnections() {
+        return inputConnections;
+    }
+
+    public List<OutputConnection> getOutputConnections() {
+        return outputConnections;
+    }
+
+    public List<Variable> getVariables() {
+        return variables;
     }
 }

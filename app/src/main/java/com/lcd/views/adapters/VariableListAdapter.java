@@ -21,14 +21,33 @@ public class VariableListAdapter extends AbstractPagedArrayAdapter<Variable> {
     protected View fillView(Variable item, ViewGroup parent) {
         View view = inflater.inflate(R.layout.variable_list_item ,parent, false);
 
-        TextView name = (TextView) view.findViewById(R.id.deviceName);
-        name.append(" " + item.getName());
+        TextView name = (TextView) view.findViewById(R.id.variableName);
+        name.append(item.getName());
 
-        TextView variableType = (TextView) view.findViewById(R.id.deviceDescription);
-        variableType.append(" ");
+        TextView device = (TextView) view.findViewById(R.id.variableDeviceName);
+        device.append(item.getDeviceId());
 
-        TextView variableStatus = (TextView) view.findViewById(R.id.deviceStatus);
-        variableStatus.append(" hardcoded ");
-        return null;
+        TextView valId1 = (TextView) view.findViewById(R.id.variableValId1);
+        valId1.append(item.getValId1()+"");
+
+        TextView valId2 = (TextView) view.findViewById(R.id.variableValId2);
+        valId2.append(item.getValId2()+"");
+
+        TextView inputConstant = (TextView) view.findViewById(R.id.variableInputConstant);
+        inputConstant.append(item.getInputConstant()+"");
+
+        TextView operator = (TextView) view.findViewById(R.id.variableOperator);
+        operator.append(item.getOp().toString());
+
+        TextView result = (TextView) view.findViewById(R.id.variableResult);
+        result.append(item.getResult().toString());
+
+        TextView resultConstant = (TextView) view.findViewById(R.id.variableResultConstant);
+        resultConstant.append(item.getResultConstant()+"");
+
+        TextView global = (TextView) view.findViewById(R.id.variableGlobal);
+        global.append(item.isGlobal()+"");
+
+        return view;
     }
 }

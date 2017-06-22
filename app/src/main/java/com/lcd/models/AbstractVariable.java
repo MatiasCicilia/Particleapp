@@ -6,7 +6,6 @@ package com.lcd.models;
 
 public class AbstractVariable extends Entity{
     private int valId;
-    private int value;
 
     public AbstractVariable(int valId,String deviceId, String name) {
         super(deviceId, name);
@@ -15,18 +14,6 @@ public class AbstractVariable extends Entity{
 
     public int getValId() {
         return valId;
-    }
-
-    public void setValId(int valId) {
-        this.valId = valId;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
     }
 
     @Override

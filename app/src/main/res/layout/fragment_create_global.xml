@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
@@ -21,7 +22,7 @@
                 android:gravity="center"
                 android:paddingTop="20dp"
                 android:paddingBottom="5dp"
-                android:text="Create new Input"
+                android:text="@string/create_new_variable"
                 android:textSize="20sp" />
 
             <EditText
@@ -30,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:ems="8"
-                android:hint="Enter Input Name"
+                android:hint="@string/enter_variable_name"
                 android:inputType="text" />
 
             <TextView
@@ -55,20 +56,10 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/inputTypeSpinner"
+                android:id="@+id/variableValId1Spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp" />
-
-            <EditText
-                android:id="@+id/variableInputId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:ems="9"
-                android:hint="Enter Input ID"
-                android:inputType="number" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,8 +79,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/cancel" />
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
 
 

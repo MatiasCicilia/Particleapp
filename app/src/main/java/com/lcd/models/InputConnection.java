@@ -2,6 +2,9 @@ package com.lcd.models;
 
 import com.lcd.models.enums.ConnectionType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by matia on 20-Jun-17.
  */
@@ -20,17 +23,15 @@ public class InputConnection extends AbstractVariable {
         return inputId;
     }
 
-    public void setInputId(int inputId) {
-        this.inputId = inputId;
-    }
-
     public ConnectionType getInput() {
         return input;
     }
 
-    public void setInput(ConnectionType input) {
-        this.input = input;
+    public List<String> toArgList(){
+        List<String> argList = new ArrayList<>();
+        argList.add(getValId()+"");
+        argList.add(getInputId()+"");
+        argList.add(input.ordinal()+"");
+        return argList;
     }
-
-
 }

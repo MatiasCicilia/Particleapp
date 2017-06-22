@@ -2,6 +2,9 @@ package com.lcd.models;
 
 import com.lcd.models.enums.ConnectionType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by matia on 20-Jun-17.
  */
@@ -22,24 +25,12 @@ public class OutputConnection extends Entity {
         return outputId;
     }
 
-    public void setOutputId(int outputId) {
-        this.outputId = outputId;
-    }
-
     public ConnectionType getOutputType() {
         return outputType;
     }
 
-    public void setOutputType(ConnectionType outputType) {
-        this.outputType = outputType;
-    }
-
     public int getValId() {
         return valId;
-    }
-
-    public void setValId(int valId) {
-        this.valId = valId;
     }
 
     @Override
@@ -58,5 +49,13 @@ public class OutputConnection extends Entity {
         int result = outputId;
         result = 31 * result + getDeviceId().hashCode();
         return result;
+    }
+
+    public List<String> toArgList(){
+        List<String> argList = new ArrayList<>();
+        argList.add(getValId()+"");
+        argList.add(getOutputId()+"");
+        argList.add(outputType.ordinal()+"");
+        return argList;
     }
 }

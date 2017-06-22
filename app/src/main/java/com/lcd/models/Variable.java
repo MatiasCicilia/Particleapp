@@ -3,6 +3,9 @@ package com.lcd.models;
 import com.lcd.models.enums.Operator;
 import com.lcd.models.enums.Result;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Matias Cicilia on 20-Jun-17.
  */
@@ -97,5 +100,18 @@ public class Variable extends AbstractVariable {
                 ", resultConstant=" + resultConstant +
                 ", global=" + global +
                 '}';
+    }
+
+    public List<String> toArgList(){
+        List<String> argList = new ArrayList<>();
+        argList.add(getValId()+"");
+        argList.add(getValId1()+"");
+        argList.add(getValId2()+"");
+        argList.add(getInputConstant()+"");
+        argList.add(getOp().ordinal()+"");
+        argList.add(getResult().ordinal()+"");
+        argList.add(getResultConstant()+"");
+        argList.add(isGlobal()?"1":"0");
+        return argList;
     }
 }

@@ -98,13 +98,14 @@ public class CreateVariableDialogFragment extends DialogFragment {
                         isGlobal,
                         (String) deviceSpinner.getSelectedItem(),
                         variableName.getText().toString());
+                getDialog().dismiss();
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                getDialog().dismiss();
             }
         });
 
@@ -155,6 +156,7 @@ public class CreateVariableDialogFragment extends DialogFragment {
         for (AbstractVariable a: list) {
             aux.add(Integer.toString(a.getValId()));
         }
+        aux.add("-1");
         return aux;
     }
 

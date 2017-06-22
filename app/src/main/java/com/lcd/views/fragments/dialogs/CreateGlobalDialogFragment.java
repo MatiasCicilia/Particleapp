@@ -18,7 +18,7 @@ import android.widget.Switch;
 
 import com.lcd.controllers.PhotonController;
 import com.lcd.models.AbstractVariable;
-import com.lcd.models.enums.ConnectionType;
+import com.lcd.models.Variable;
 import com.lcd.models.enums.Operator;
 import com.lcd.models.enums.Result;
 import com.lcd.util.DpiUtils;
@@ -30,40 +30,34 @@ import io.particle.android.sdk.cloud.ParticleDevice;
 import lcd.particle.R;
 
 /**
- * Created by Ignacio on 6/21/17.
+ * Created by Ignacio on 6/21/2017.
  */
 
-public class CreateInputDialogFragment extends DialogFragment {
-    private final static String TAG = CreateVariableDialogFragment.class.getSimpleName();
-    private boolean isGlobal;
+public class CreateGlobalDialogFragment  extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create_input, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_global, container, false);
 
         final EditText variableName = (EditText) view.findViewById(R.id.variableNameText);
 
         final Spinner deviceSpinner = (Spinner) view.findViewById(R.id.variableDeviceSpinner);
         renderSpinner(devicesToStringList(PhotonController.getInstance().getDevices()), deviceSpinner);
 
-        final Spinner inputTypeSpinner = (Spinner) view.findViewById(R.id.inputTypeSpinner);
-        renderSpinner(ConnectionType.getListValues(), inputTypeSpinner);
-
-        final EditText inputId = (EditText) view.findViewById(R.id.variableInputId);
+        final Spinner valId1Spinner = (Spinner) view.findViewById(R.id.variableValId1Spinner);
+        renderSpinner(variableToStringList(PhotonController.getInstance().getGlobalVariables()), valId1Spinner);
 
         Button sendButton = (Button) view.findViewById(R.id.variableSendButton);
         Button cancelButton = (Button) view.findViewById(R.id.variableCancelButton);
-
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PhotonController.getInstance()
-                        .createInputConnection(
-                                Integer.parseInt(inputId.getText().toString()),
-                                ConnectionType.valueOf((String)inputTypeSpinner.getSelectedItem()),
+                        .createForeignVariable(
                                 (String) deviceSpinner.getSelectedItem(),
-                                variableName.getText().toString());
+                                variableName.getText().toString(),
+                                Integer.parseInt((String)valId1Spinner.getSelectedItem()));
                 getDialog().dismiss();
             }
         });
@@ -114,6 +108,15 @@ public class CreateInputDialogFragment extends DialogFragment {
         for (ParticleDevice d: list) {
             aux.add(d.getName());
         }
+        return aux;
+    }
+
+    private List<String> variableToStringList(List<Variable> list) {
+        List<String> aux = new ArrayList<>();
+        for (Variable a: list) {
+            aux.add(Integer.toString(a.getValId()));
+        }
+        aux.add("-1");
         return aux;
     }
 }

@@ -79,13 +79,14 @@ public class CreateOutputDialogFragment extends DialogFragment {
                                 Integer.parseInt((String)valOutput.getSelectedItem()),
                                 (String) deviceSpinner.getSelectedItem(),
                                 variableName.getText().toString());
+                getDialog().dismiss();
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                getDialog().dismiss();
             }
         });
 

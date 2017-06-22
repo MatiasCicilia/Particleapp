@@ -3,22 +3,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-        <item
             android:id="@+id/nav_devices"
             android:icon="@drawable/ic_menu_manage"
             android:title="Devices" />
@@ -26,19 +10,18 @@
             android:id="@+id/nav_variables"
             android:icon="@drawable/ic_menu_manage"
             android:title="Variables" />
+        <item
+            android:id="@+id/nav_inputs"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Inputs" />
+        <item
+            android:id="@+id/nav_outputs"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Outputs" />
+        <item
+            android:id="@+id/nav_globals"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Variables Globales" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
 
 </menu>

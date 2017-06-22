@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,7 +21,13 @@ import android.view.MenuItem;
 
 import com.lcd.controllers.PhotonController;
 import com.lcd.views.fragments.DeviceListFragment;
+import com.lcd.views.fragments.GlobalListFragment;
+import com.lcd.views.fragments.InputListFragment;
+import com.lcd.views.fragments.OutputListFragment;
 import com.lcd.views.fragments.VariableListFragment;
+import com.lcd.views.fragments.dialogs.CreateGlobalDialogFragment;
+import com.lcd.views.fragments.dialogs.CreateInputDialogFragment;
+import com.lcd.views.fragments.dialogs.CreateOutputDialogFragment;
 import com.lcd.views.fragments.dialogs.CreateVariableDialogFragment;
 
 import java.io.IOException;
@@ -33,6 +40,9 @@ import lcd.particle.R;
 
 import static lcd.particle.R.id.fab;
 import static lcd.particle.R.id.nav_devices;
+import static lcd.particle.R.id.nav_globals;
+import static lcd.particle.R.id.nav_inputs;
+import static lcd.particle.R.id.nav_outputs;
 import static lcd.particle.R.id.nav_variables;
 
 /*
@@ -51,6 +61,10 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = MainActivity.class.getSimpleName();
     private DeviceListFragment deviceListFragment;
     private VariableListFragment variableListFragment;
+    private OutputListFragment outputListFragment;
+    private InputListFragment inputListFragment;
+    private GlobalListFragment globalListFragment;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,18 +96,14 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CreateVariableDialogFragment fragment = new CreateVariableDialogFragment();
-                fragment.setArguments(new Bundle());
-                fragment.show(getFragmentManager(),"");
-            }
-        });
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
 
         deviceListFragment = new DeviceListFragment();
         variableListFragment = new VariableListFragment();
+        outputListFragment = new OutputListFragment();
+        inputListFragment = new InputListFragment();
+        globalListFragment = new GlobalListFragment();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -131,6 +141,13 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    PhotonController.getInstance().configure();
+                }
+            };
+            new Thread(runnable).start();
             return true;
         }
 
@@ -143,13 +160,47 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
+        fab.show();
         switch (id) {
             case nav_devices:
                 fragment = deviceListFragment;
+                fab.hide();
                 break;
             case nav_variables:
                 fragment = variableListFragment;
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new CreateVariableDialogFragment().show(getFragmentManager(),"");
+                    }
+                });
                 break;
+            case nav_inputs:
+                fragment = inputListFragment;
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new CreateInputDialogFragment().show(getFragmentManager(),"");
+                    }
+                });
+                break;
+            case nav_outputs:
+                fragment = outputListFragment;
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new CreateOutputDialogFragment().show(getFragmentManager(),"");
+                    }
+                });
+                break;
+            case nav_globals:
+                fragment = globalListFragment;
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new CreateGlobalDialogFragment().show(getFragmentManager(),"");
+                    }
+                });
         }
 
         if(fragment!=null) {

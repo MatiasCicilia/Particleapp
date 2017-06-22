@@ -15,69 +15,39 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/variableName"
+                android:id="@+id/inputName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/variable_name"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/variableDeviceName"
+                android:id="@+id/inputDeviceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/variable_name"
-                android:textSize="20sp" />
+                android:text="@string/variable_type"
+                android:textSize="15sp" />
 
 
             <TextView
-                android:id="@+id/variableValId1"
+                android:id="@+id/inputValId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/variable_type"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/variableValId2"
+                android:id="@+id/inputType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/variable_type"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/variableInputConstant"
+                android:id="@+id/inputId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/variable_type"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/variableOperator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Variable Operator:"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/variableResult"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Variable Result:"
-                android:textSize="15sp" />
-
-
-            <TextView
-                android:id="@+id/variableResultConstant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Variable Result Constant:"
-                android:textSize="15sp" />
-
-
-            <TextView
-                android:id="@+id/variableGlobal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Variable Global:"
+                android:text="@string/variable_status"
                 android:textSize="15sp" />
         </LinearLayout>
 
