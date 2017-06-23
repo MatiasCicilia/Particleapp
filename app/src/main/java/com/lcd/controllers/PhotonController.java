@@ -77,8 +77,8 @@ public class PhotonController {
                                int inputConstant, Operator op, Result result,
                                int resultConstant, boolean global, String deviceId, String name) {
         int valId = id.incrementAndGet();
-        valId1 = valId1==-1?valId:valId1;
-        valId2 = valId2==-1?valId:valId2;
+        valId1 = (valId1==-1)?valId:valId1;
+        valId2 = (valId2==-1)?valId:valId2;
 
         Variable variable = new Variable(valId,valId1, valId2,
         inputConstant, op, result,
@@ -117,6 +117,8 @@ public class PhotonController {
     private void sendInputs(ParticleDevice device) {
         Log.d("Controller","Sending inputs");
         for(InputConnection c: inputConnections){
+            Log.d("Name",c.getDeviceId());
+            Log.d("Name",device.getName());
             if(c.getDeviceId().equals(device.getName())){
                 try {
                     Log.d("Controller","Sending input "+c.getName()+ " to "+c.getDeviceId());
@@ -217,6 +219,7 @@ public class PhotonController {
         if (listContainer.inputConnections != null) this.inputConnections = listContainer.inputConnections;
         if (listContainer.outputConnections != null) this.outputConnections = listContainer.outputConnections;
         if (listContainer.outputConnections != null) this.foreignVariables = listContainer.foreignVariables;
+        this.id = new AtomicInteger(listContainer.id);
     }
 
     public void save(Context context){
@@ -227,12 +230,14 @@ public class PhotonController {
         listContainer.foreignVariables = this.foreignVariables;
         listContainer.inputConnections = this.inputConnections;
         listContainer.outputConnections = this.outputConnections;
+        listContainer.id = this.id.get();
         listContainer.variables = this.variables;
         ed.putString("myObjectKey", gson.toJson(listContainer));
         ed.commit();
     }
 
     private class ListContainer {
+        int id;
         List<ForeignVariable> foreignVariables;
         List<InputConnection> inputConnections;
         List<OutputConnection> outputConnections;

@@ -36,6 +36,7 @@ import java.io.IOException;
 import io.particle.android.sdk.cloud.ParticleCloud;
 import io.particle.android.sdk.cloud.ParticleCloudException;
 import io.particle.android.sdk.cloud.ParticleCloudSDK;
+import io.particle.android.sdk.cloud.ParticleEventVisibility;
 import io.particle.android.sdk.utils.Async;
 import lcd.particle.R;
 
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public Object callApi(@NonNull ParticleCloud particleCloud) throws ParticleCloudException, IOException {
                 ParticleCloudSDK.getCloud().logIn("nachoberdinas@gmail.com", "wololo");
+
                 PhotonController.getInstance().setDevices(ParticleCloudSDK.getCloud().getDevices());
                 return null;
             }

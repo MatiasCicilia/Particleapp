@@ -156,6 +156,7 @@ public class CreateVariableDialogFragment extends DialogFragment {
         for (AbstractVariable a: list) {
             aux.add(Integer.toString(a.getValId()));
         }
+        aux.add("-2");
         aux.add("-1");
         return aux;
     }
